@@ -1,8 +1,6 @@
 package com.jcontinuos.gitlab.projects.gateway;
 
 import com.jcontinuos.gitlab.projects.dto.Projects;
-import com.jcontinuos.gitlab.user.dto.GitLabUser;
-import com.jcontinuos.gitlab.user.gateway.GitLabGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -18,16 +16,16 @@ public class ProjectsGateway {
     private static final Logger log = LoggerFactory.getLogger(ProjectsGateway.class);
 
     public Projects getProjectById(String url) {
-        log.info("Buscando o usuário.");
+        log.info("Buscando projeto.");
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(url, Projects.class);
     }
 
     public List<Projects> getAllProjects(String url) {
-        log.info("Buscando todos os usuários referentes ao token");
+        log.info("Buscando todos os projetos referentes ao token");
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.exchange(
-                "http://gitlab.anymarket.intranet/api/v4/projects?private_token=TOKEN",
+                url,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Projects>>() {

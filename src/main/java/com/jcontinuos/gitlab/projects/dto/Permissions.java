@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Permissions {
     @JsonProperty(value = "project_access")
-    private String projectAccess;
+    private ProjectAccess projectAccess;
     @JsonProperty(value = "group_access")
     private GroupAccess groupAccess;
 
-    public String getProjectAccess() {
+    public ProjectAccess getProjectAccess() {
         return projectAccess;
     }
 
