@@ -36,6 +36,38 @@ public class MergeRequest {
     @JsonProperty(value = "web_url")
     private String webUrl;
 
+
+    public MergeRequest() {
+    }
+
+    public MergeRequest(Long id, Long projectId, String title, String targetBranch, String sourceBranch) {
+        this.id = id;
+        this.projectId = projectId;
+        this.title = title;
+        this.targetBranch = targetBranch;
+        this.sourceBranch = sourceBranch;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setTargetBranch(String targetBranch) {
+        this.targetBranch = targetBranch;
+    }
+
+    public void setSourceBranch(String sourceBranch) {
+        this.sourceBranch = sourceBranch;
+    }
+
     public Long getId() {
         return id;
     }
