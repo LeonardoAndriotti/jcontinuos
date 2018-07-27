@@ -23,8 +23,7 @@ public class MergeRequestService {
     private MergeRequestGateway gateway;
 
 
-
-    public void mergeToDevelop(ParameterMerges params) {
+    public void mergeBranchToDevelop(ParameterMerges params) {
         log.info("Mergeando as atividade na develop");
         for(String name :params.getBrandsName()){
             MergeRequest request = translate(params,name);
