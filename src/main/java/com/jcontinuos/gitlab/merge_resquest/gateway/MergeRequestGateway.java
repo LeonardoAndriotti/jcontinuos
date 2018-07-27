@@ -36,7 +36,7 @@ public class MergeRequestGateway {
         return convertJson.extract(result);
     }
 
-    public List<MergeRequest> createMergeRequest(MergeRequest body) throws URISyntaxException, JSONException {
+    public MergeRequest createMergeRequest(MergeRequest body) throws URISyntaxException, JSONException {
         //pegar usuário logado
         JSONObject json = new JSONObject();
         json.put("id",body.getId());
@@ -47,7 +47,7 @@ public class MergeRequestGateway {
         Map<String,String> params = new HashMap<>();
         params.put("private_token","TOKEN");
         ResponseEntity<String> result = this.executor.post(generateUrl(body.getProjectId()),json,null,String.class);
-        return convertJson.extract(result);
+        return convertJson.extractSimple(result);
     }
 
     //POST /projects/:id/merge_requests

@@ -19,6 +19,13 @@ public class PipelineApi {
     @PostMapping(value = "/create/release")
     public void createNewRealease(@RequestBody ParameterMerges params){
         //criar uma fila para executar um realese por fez.
+        service.create(params);
+
+    }
+    @PostMapping(value = "/remove/release")
+    public void removeRealease(@RequestBody ParameterMerges params){
+        //criar uma fila para executar um realese por fez.
+        service.remove(params);
 
     }
 

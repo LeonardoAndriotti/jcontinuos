@@ -21,4 +21,9 @@ public class MergeResquestExtract {
         return Arrays.asList(GSON.fromJson(result.getBody(), MergeRequest[].class));
     }
 
+    public MergeRequest extractSimple(ResponseEntity<String> result) {
+        Preconditions.checkNotNull(result, "O result deve ser informado para realizar a extração.");
+        return GSON.fromJson(result.getBody(), MergeRequest.class);
+    }
+
 }

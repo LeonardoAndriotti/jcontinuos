@@ -1,17 +1,14 @@
 package com.jcontinuos.gitlab.merge_resquest.service;
 
-import com.jcontinuos.gitlab.branchs.gateway.BranchGateway;
-import com.jcontinuos.gitlab.branchs.service.BranchService;
 import com.jcontinuos.gitlab.merge_resquest.dto.MergeRequest;
 import com.jcontinuos.gitlab.merge_resquest.dto.ParameterMerges;
 import com.jcontinuos.gitlab.merge_resquest.gateway.MergeRequestGateway;
-import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,15 +20,18 @@ public class MergeRequestService {
     private MergeRequestGateway gateway;
 
 
-    public void mergeBranchToDevelop(ParameterMerges params) {
+    public void init(ParameterMerges params) throws Exception {
+        mergeBranchToDevelop(params);
+        approvadMergesDevelop();
+    }
+    private void mergeBranchToDevelop(ParameterMerges params) throws Exception{
         log.info("Mergeando as atividade na develop");
+        List<MergeRequest> merges = new ArrayList<>();
         for(String name :params.getBrandsName()){
             MergeRequest request = translate(params,name);
             try {
-                gateway.createMergeRequest(request);
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+                merges.add(gateway.createMergeRequest(request));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -46,7 +46,8 @@ public class MergeRequestService {
         request.setTitle(params.getTitle());
         return request;
     }
-    public void approvadMergesDevelop() {
+
+    private void approvadMergesDevelop() {
         try {
 
         } catch (Exception ex) {
