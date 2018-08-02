@@ -1,5 +1,6 @@
 package com.jcontinuos.gitlab.merge_resquest.gateway;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jcontinuos.gitlab.http.DateSerializer;
@@ -23,7 +24,13 @@ public class MergeResquestExtract {
 
     public MergeRequest extractSimple(ResponseEntity<String> result) {
         Preconditions.checkNotNull(result, "O result deve ser informado para realizar a extração.");
-        return GSON.fromJson(result.getBody(), MergeRequest.class);
+
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .create();
+
+        return gson.fromJson(result.getBody(),  MergeRequest.class);
+
     }
 
 }

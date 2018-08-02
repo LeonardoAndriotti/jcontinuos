@@ -45,8 +45,8 @@ public class MergeRequestGateway {
         json.put("title",body.getTitle());
 
         Map<String,String> params = new HashMap<>();
-        params.put("private_token","TOKEN");
-        ResponseEntity<String> result = this.executor.post(generateUrl(body.getProjectId()),json,null,String.class);
+        params.put("private_token","yeBLGjYzsGy6QyssYYaB");
+        ResponseEntity<String> result = this.executor.post(generateUrl(body.getProjectId()),json.toString(),params,String.class);
         return convertJson.extractSimple(result);
     }
 

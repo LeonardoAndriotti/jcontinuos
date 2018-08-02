@@ -1,4 +1,4 @@
-package com.jcontinuos.gitlab.realease.dto;
+package com.jcontinuos.gitlab.pipeline.dto;
 
 public enum Type {
     CREATE("CREATE"),

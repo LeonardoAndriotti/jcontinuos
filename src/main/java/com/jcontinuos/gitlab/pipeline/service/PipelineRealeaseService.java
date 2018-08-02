@@ -1,10 +1,8 @@
-package com.jcontinuos.gitlab.realease.service;
+package com.jcontinuos.gitlab.pipeline.service;
 
 import com.jcontinuos.gitlab.branchs.service.BranchService;
 import com.jcontinuos.gitlab.merge_resquest.dto.ParameterMerges;
 import com.jcontinuos.gitlab.merge_resquest.service.MergeRequestService;
-import com.jcontinuos.gitlab.realease.dto.Type;
-import org.assertj.core.util.diff.Delta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +14,13 @@ public class PipelineRealeaseService {
     @Autowired
     private BranchService branchService;
 
-    public void create(ParameterMerges params) {
-      try{
-          mergeRequestService.init(params);
-      }catch (Exception ex){
-
-      }
+    public void create(ParameterMerges params) throws Exception{
+        try {
+            mergeRequestService.init(params);
+            //criar branch partir da develop
+        } catch (Exception ex) {
+            throw new Exception(ex);
+        }
     }
 
     public void remove(ParameterMerges params) {

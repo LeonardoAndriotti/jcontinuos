@@ -1,4 +1,4 @@
-package com.jcontinuos.gitlab.versions.dto;
+package com.jcontinuos.gitlab.version.dto;
 
 import java.util.Map;
 

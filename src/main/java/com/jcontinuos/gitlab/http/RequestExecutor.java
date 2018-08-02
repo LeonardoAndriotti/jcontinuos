@@ -1,8 +1,7 @@
 package com.jcontinuos.gitlab.http;
 
-import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import com.jcontinuos.gitlab.merge_resquest.dto.MergeRequest;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -34,12 +33,15 @@ public class RequestExecutor {
         StringBuilder urlBuilder = new StringBuilder();
         urlBuilder.append(url);
 
-        //HttpHeaders headers = new HttpHeaders();
-        //headers.add("Authorization", "Basic " + b2WConfiguration.getEncryptedKey());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
-        URI uri = new URI(urlBuilder.toString());
+        if (!urlParams.isEmpty()) {
+            urlParams.keySet().forEach(key -> urlBuilder.append(urlBuilder.indexOf("?") >= 0 ? '&' : '?').append(key).append("=").append(urlParams.get(key)));
+        }
+        URI uri = new UriTemplate(urlBuilder.toString()).expand(urlParams);
 
-        RequestEntity<Object> request = new RequestEntity<>(value, null, method, uri);
+        RequestEntity<Object> request = new RequestEntity<>(value, headers, method, uri);
 
         return this.restTemplate.exchange(request, responseType);
     }
