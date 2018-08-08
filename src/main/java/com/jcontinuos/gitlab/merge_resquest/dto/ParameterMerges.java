@@ -15,7 +15,11 @@ public class ParameterMerges {
     @JsonProperty(value="project_id", required=true)
     private Long projectId;
     @JsonProperty(value="target_branch", required=true)
-    private String targetBranch;
+    private List<String> targetBranch;
+
+    public List<String> getTargetBranch() {
+        return targetBranch;
+    }
 
     public String getTitle() {
         return title;
@@ -29,7 +33,4 @@ public class ParameterMerges {
         return projectId;
     }
 
-    public String getTargetBranch() {
-        return targetBranch;
-    }
 }

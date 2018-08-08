@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PipelineRealeaseService {
+public class PipelineService {
 
     @Autowired
     private MergeRequestService mergeRequestService;
