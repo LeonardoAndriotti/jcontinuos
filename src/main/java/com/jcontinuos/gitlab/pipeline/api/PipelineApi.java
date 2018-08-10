@@ -20,7 +20,7 @@ public class PipelineApi {
     @Autowired
     private PipelineService service;
 
-    @PostMapping(value = "/create/release")
+    @PostMapping(value = "/create/pipeline")
     public void create(@RequestBody ParameterMerges params) throws Exception{
         checkParameterMerges(params);
         //criar uma fila para executar um realese por fez.

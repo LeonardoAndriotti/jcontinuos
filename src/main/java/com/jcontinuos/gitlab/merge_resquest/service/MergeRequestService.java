@@ -3,11 +3,13 @@ package com.jcontinuos.gitlab.merge_resquest.service;
 import com.jcontinuos.gitlab.merge_resquest.dto.MergeRequest;
 import com.jcontinuos.gitlab.merge_resquest.dto.ParameterMerges;
 import com.jcontinuos.gitlab.merge_resquest.gateway.MergeRequestGateway;
+import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,9 +58,11 @@ public class MergeRequestService {
 
     private void approvadMergesDevelop(List<MergeRequest> merges) {
         try {
-
-        } catch (Exception ex) {
-            //tratar os erros de aprovação de merge aqui
+            for (MergeRequest merge : merges) {
+                gateway.acceptMergeRequest(merge.getProjectId(), merge.getIid());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
